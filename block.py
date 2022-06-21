@@ -10,26 +10,20 @@ class Block:
     def __init__(self, pending_transactions: List[Transaction]) -> None:
         self.timestamp = time.time() # time a block was created
         self.transactions = pending_transactions
-        self.hash = self.calculate_hash() 
+        self.hash = None 
         self.previous_hash = None
         
     def calculate_hash(self) -> str:
-        block_string = str(self.timestamp) + str(self.miner)
+        block_string = str(self.timestamp) + str(self.previous_hash) 
         for transaction in self.transactions:
             block_string += str(transaction)
-        return hashlib.sha256(block_string.encode('utf-8')).hexdigest()
+        self.hash = hashlib.sha256(block_string.encode('utf-8')).hexdigest()
+        return self.hash
     
     def to_dict(self):
         return {
+            "hash": self.hash,
             "timestamp": self.timestamp,
-            "miner": self.miner,
             "transactions": [transaction.to_dict() for transaction in self.transactions],
             "hash": self.hash
         }
-
-tx1 = Transaction(doer='Supriya', copier='Ranju', words=300)
-tx2 = Transaction(doer='Newton', copier='Sanskar', words=500)
-pending_txs = [tx1, tx2]
-
-blk1 = Block(pending_transactions=pending_txs)
-print(blk1.to_dict())
