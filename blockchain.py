@@ -11,9 +11,7 @@ class Blockchain:
     def add_block(self, new_block: Block) -> None:        
         # connect the previous block to the new block to create a chain by their hashes
         new_block.previous_hash = self.last_block.hash
-
         self.last_block = new_block
-
         self.blocks[new_block.hash] = new_block
 
     def print_chain(self) -> None:
