@@ -26,6 +26,3 @@ class Transaction:
             "words": self.words,
             "hash": self.hash
         }
-
-tx = Transaction(doer='Supriya', copier='Ranju', words=3)
-print(tx.to_dict())
