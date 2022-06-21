@@ -15,6 +15,9 @@ class Transaction:
         transaction_string = str(self.timestamp) + str(self.doer) + str(self.copier) + str(self.words)
         return hashlib.sha256(transaction_string.encode('utf-8')).hexdigest() # use the sha256 hashing algorithm
 
+    def sign(self) -> str:
+        pass
+
     def __str__(self) -> str:
         return f'Assignment Doer: {self.doer}\nAssignment Copier: {self.copier}\nWords: {self.words}\nTimestamp: {self.timestamp}\nHash: {self.hash}'
 
@@ -26,6 +29,3 @@ class Transaction:
             "words": self.words,
             "hash": self.hash
         }
-
-tx = Transaction(doer='Supriya', copier='Ranju', words=3)
-print(tx.to_dict())
